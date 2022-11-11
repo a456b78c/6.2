@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+void create(int* a, const int n, const int HIGH, const int LOW);
+void print(int* a, const int n);
+int suma_neparnih(int* a, const int n, int i);
+
+
+
+int main()
+{
+    srand(time(NULL));
+    const int n = 24;
+    int a[n];
+    const int HIGH = 100;
+    const int LOW = 0;
+    create(a, n, HIGH, LOW);
+    print(a, n);
+    const int i = 0;
+    cout << "Min value: ";
+    cout << suma_neparnih(a, n, i) << endl;
+    print(a, n);
+}
+void create(int* a, const int n, const int HIGH, const int LOW)
+{
+    for (int i = 0; i < n; i++)
+    {
+        a[i] = LOW + rand() % (HIGH - LOW + 1);
+    }
+}
+void print(int* a, const int n)
+{
+    cout << "A = { ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << a[i] << " ";
+    }
+    cout << "}" << endl;
+}
+
+int suma_neparnih(int* a, const int n, int i)
+{
+    if (i < n)
+    {
+        if (a[i] % 2 != 0)
+            return a[i] + suma_neparnih(a, n, i + 1);
+        else
+            return suma_neparnih(a, n, i + 1);
+    }
+    return 0;       
+   
+}
